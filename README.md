@@ -1,6 +1,6 @@
 # Docker
 
-**Introduction to Docker**
+# **Introduction to Docker**
 **How the IT Industry Worked Before Docker**
 **Physical Servers (Traditional Setup):**
 
