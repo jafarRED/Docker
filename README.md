@@ -9,6 +9,7 @@
   Let’s say we have a server with 24 GB RAM and 250 GB storage. We install two applications on it:
 
 **Application A:** Requires Java 8 and Node.js 16 and uses 10 GB RAM.
+
 **Application B:** Requires Java 11 and Node.js 22 and uses a similar amount of resources.
 
 **The Challenge:**
