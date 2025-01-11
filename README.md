@@ -98,13 +98,15 @@
   
 **Example:**
   A payment service might run in one container, while a user authentication service runs in another, ensuring isolation and easier scaling.
-  Advantages of Docker Over Virtual Machines
-**  Feature     	Virtual Machines	       Docker Containers**
-  Startup Time	1–2 minutes or more 	Few milliseconds
-  Resource Utilization	Fixed resources, leads to wastage	Dynamic, highly efficient
-  OS Requirement	Each VM needs a full OS	Shares host OS kernel
-  Performance	Higher overhead (due to OS per VM)	Lightweight, minimal overhead
-  Portability	Limited	Highly portable across environments
+  
+**Advantages of Docker Over Virtual Machines**
+
+**Feature     	          Virtual Machines	                               Docker Containers**
+  Startup Time	          1–2 minutes or more 	                            Few milliseconds
+  Resource Utilization  	Fixed resources, leads to wastage	Dynamic         highly efficient
+  OS Requirement	        Each VM needs a full OS                         	Shares host OS kernel
+  Performance           	Higher overhead (due to OS per VM)	              Lightweight, minimal overhead
+  Portability	           Limited	                                          Highly portable across environments
   
 **Conclusion**
 Docker has revolutionized the IT industry by providing a lightweight, efficient, and scalable way to run applications. It solves many of the problems faced with physical servers and virtual machines, making it a cornerstone of modern DevOps practices.
