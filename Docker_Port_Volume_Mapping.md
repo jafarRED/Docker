@@ -153,9 +153,6 @@ Port mapping is fundamental when working with Docker containers to expose servic
 
 ---
 
-
-
-```markdown
 # Docker Volume Mapping
 
 Volume mapping in Docker allows you to persist data generated or used by a container. It helps ensure that data remains intact even if the container is stopped, restarted, or removed. Here's everything you need to know about volume mapping!
