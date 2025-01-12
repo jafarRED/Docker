@@ -157,7 +157,16 @@ Port mapping is fundamental when working with Docker containers to expose servic
 
 ## **What is Docker Volume Mapping?**
 
-Docker containers are **ephemeral** by nature, which means their data is lost when the container stops or is removed.  
+Docker containers are **ephemeral** in the sense that the data inside the container is not automatically persisted when the container is removed. 
+However, data inside a running container does **persist** during the **container’s life cycle**, **even if the container is stopped and then restarted**. 
+
+The data will be lost only **if the container is removed** or **killed** without any external storage like volumes or bind mounts.
+
+**Key Points:**
+ - Data is persistent during the container’s life cycle: While the container is running (or even stopped), any data written inside the container will persist.
+ - Data is lost when the container is removed: If the container is deleted (removed), the data inside it will be deleted too, unless it's saved in a Docker volume or bind mount.
+ - Volumes and Bind Mounts are used to persist data beyond the container's lifecycle.
+
 **Volume Mapping** allows you to link a directory or file from the **host machine** to a **container**, making it possible to **persist data** across container restarts and removals.
 
 ## **Why is Volume Mapping Important?**
