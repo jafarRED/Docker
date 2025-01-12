@@ -130,7 +130,7 @@ This will display the inode number of each file and directory within `/home/user
 - You can’t create hard links to directories (except for `.` and `..`), which helps avoid creating circular references in the file system.
 
 ---
-# <span style="color:red;">Inodes and Disk Space: What Happens When Inodes Are Fully Used?</span>
+#  🔴 Inodes and Disk Space: What Happens When Inodes Are Fully Used? 🔴
 
 If inodes are fully used but you still have disk space left, the following issues may occur:
 
