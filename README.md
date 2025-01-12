@@ -142,6 +142,8 @@ Docker revolutionized the IT industry by providing a lightweight, efficient, and
 
 [ 📌 Understanding Docker Images, Dockerfiles, and Docker Compose part2.](Custom_Image_Dockerfile_part-2.md) 
 
+[ 📌 Best_Practices_Dockerfile])Best_Practices_Dockerfile.md)
+
 3. Managing containers and volumes for data persistence.
 4. Using Docker in CI/CD pipelines.
 
