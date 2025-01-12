@@ -174,6 +174,8 @@ The data is still accessible using `hardlink.txt` because the inode is intact.
 # Soft Link (Symbolic Link)
 
 A soft link (or symbolic link) is like a shortcut or pointer to another file. It stores the path to the target file, not the actual data.
+The soft link is not **a duplicate** or **a copy** of the original file's content. Instead, it is **simply a pointer** or reference** to the original file**. It stores only the path to the file it points to.
+The data itself (the actual content of the file) is still stored in the original file. The soft link doesn’t contain any of the file's contents, **just** the **address or location where the original file is located**.
 
 ## Key Features of Soft Links:
 
