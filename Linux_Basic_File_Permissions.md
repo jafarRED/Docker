@@ -1,7 +1,7 @@
 
 # File Permissions and Ownership in Linux
 
-## Example Output
+## ls -ltr
 ```bash
 drwxrwxr-x  3 jafar jafar      4096 Jan  5 14:24 SSD
 -rwxr-xr-x  1 root  root   51454104 Jan  7 18:06 kubectl
@@ -79,7 +79,12 @@ Each group consists of three characters:
 - `-`: Others cannot write to the file.
 - `x`: Others can execute the file.
 
-## Other Columns in `ls -l` Output
+## Other Columns in `ls -ltr` Output
+## ls -ltr
+```bash
+drwxrwxr-x  3 jafar jafar      4096 Jan  5 14:24 SSD
+-rwxr-xr-x  1 root  root   51454104 Jan  7 18:06 kubectl
+```
 | Column | Description |
 |--------|-------------|
 | Link Count (`3`, `1`) | Number of hard links to the file or directory. |
