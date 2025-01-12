@@ -121,7 +121,7 @@ This will display the inode number of each file and directory within `/home/user
 
 ---
 
-## Summary for Students
+## Summary 
 - **Inode**: A unique identifier used to store the metadata of a file or directory in a Linux file system.
 - **Not including file name**: The inode stores information like ownership, permissions, file size, timestamps, and location of data blocks, but the file name is stored separately.
 - **Hard links and inode**: Multiple hard links can refer to the same inode, meaning different file names can point to the same data.
