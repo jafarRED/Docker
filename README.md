@@ -137,7 +137,9 @@ Docker revolutionized the IT industry by providing a lightweight, efficient, and
 ### Next Steps:
 
 [ 🛠️ Installing Docker and running your first container.](./Docker_Installation.md)
+
 [📌Basics _of_Docker](Basics_of_Docker.md)
+
 [ 🎯 Understanding Docker Images, Dockerfiles, and Docker Compose part1.](Custom_Image_part-1.md) 
 
 [ 🚀 Understanding Docker Images, Dockerfiles, and Docker Compose part2.](Custom_Image_Dockerfile_part-2.md) 
