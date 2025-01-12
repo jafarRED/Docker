@@ -122,6 +122,9 @@ A payment service runs in one container, and a user authentication service runs 
 | **Performance**      | Higher overhead (due to OS per VM) | Lightweight, minimal overhead |
 | **Portability**      | Limited                    | Highly portable           |
 
+![image](https://github.com/user-attachments/assets/e0896169-ce75-48e8-8570-c3dccf53e06c)
+
+
 ---
 
 ### Conclusion
