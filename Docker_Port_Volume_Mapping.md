@@ -17,7 +17,6 @@ Port mapping in Docker allows a container running an application to be accessibl
 
 1. **Access the Containerized Application:**
    - If you’re running a web server or API inside a container, you need to make it available outside the container. Port mapping achieves this.
-
 2. **Isolation and Security:**
    - Docker containers are isolated environments. By default, their services aren’t exposed to the external world, which is secure. Port mapping gives you control over what gets exposed.
 
@@ -298,18 +297,19 @@ docker run -d -v /path/to/code:/app my_dev_container
 Share configuration files between multiple containers by mounting the same volume.
 
 ---
-**Best Practices for Volume Mapping**
+## **Best Practices for Volume Mapping**
 **Use Named Volumes for Persistence:**
  - Named volumes are more reliable and easier to manage than bind mounts.
- - 
+   
 **Restrict Access to Sensitive Files:**
  - Avoid exposing sensitive files (e.g., SSH keys) through volume mapping unless necessary.
- - 
+   
 **Separate Application from Data:**
 - Store data in volumes and keep the application in containers for modularity.
   
 **Clean Up Unused Volumes:**
  - Regularly remove unused volumes to free up space:
+   
    ```bash
    docker volume prune
    ```
