@@ -216,6 +216,7 @@ docker run --mount type=bind,source=<host_path>,target=<container_path> <image_n
 ### Creating a Volume:
 
 Use Docker to create a volume:
+These volumes are Managed By Docker
 
 ```shellscript
 docker volume create my_volume
@@ -256,14 +257,6 @@ docker run -d -v /home/user/app:/app node
 ```
 
 Now, any changes made in `/home/user/app` on the host will be reflected inside the container at `/app`, and vice versa.
-
-## Difference Between Volumes and Bind Mounts
-
-| Feature | Volumes | Bind Mounts
-|-----|-----|-----
-| Managed By Docker | Yes | No
-| Path Configuration | Abstract path | Specific host path
-| Best For | Persistent application data | Development workflows
 
 
 ## Common Scenarios for Volume Mapping
