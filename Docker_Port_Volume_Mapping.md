@@ -297,7 +297,19 @@ docker run -d -v /path/to/code:/app my_dev_container
 
 Share configuration files between multiple containers by mounting the same volume.
 
-```plaintext
-
-You can now copy this content and save it as a .md file (e.g., `docker-volume-mapping.md`) in your project directory. This Markdown file is ready to be used as documentation or a README on GitHub or any other platform that supports Markdown formatting.
-```
+---
+**Best Practices for Volume Mapping**
+**Use Named Volumes for Persistence:**
+ - Named volumes are more reliable and easier to manage than bind mounts.
+ - 
+**Restrict Access to Sensitive Files:**
+ - Avoid exposing sensitive files (e.g., SSH keys) through volume mapping unless necessary.
+ - 
+**Separate Application from Data:**
+- Store data in volumes and keep the application in containers for modularity.
+  
+**Clean Up Unused Volumes:**
+ - Regularly remove unused volumes to free up space:
+   ```bash
+   docker volume prune
+   ```
