@@ -110,6 +110,33 @@ This will display the inode number of each file and directory within `/home/user
 - **File Names**: The inode does not contain any information about the file name or its location in the file system. The name is stored separately in the directory entry, which points to the inode number.
 - **Efficiency**: Inodes are used to optimize file access. Since the inode contains information about where the actual file data is stored, the system can quickly locate and access the file's contents.
 
+
+**To check the number of inodes used and available on your system, you can use the df command with the -i option, which displays inode usage instead of disk usage.**
+
+``` bash
+df -i
+```
+Explanation:
+The df command shows file system disk space usage.
+The -i option shows inode usage instead of the disk usage.
+Example Output:
+```bash
+Filesystem     Inodes  IUsed   IFree IUse% Mounted on
+/dev/sda1      1000000 500000 500000  50% /
+/dev/sdb1      500000  1000   499000   1% /data
+```
+ **Columns**:
+- **Filesystem**: The file system you are checking.
+- **Inodes**: Total number of inodes available.
+- **IUsed**: Number of inodes that are currently in use.
+- **IFree**: Number of inodes that are free (available).
+- **IUse%**: Percentage of inodes used.
+**In this example:**
+
+The file system /dev/sda1 has 1,000,000 inodes, and 500,000 are in use, so 500,000 are available (50% used).
+The /dev/sdb1 file system has 500,000 inodes, of which only 1,000 are used, leaving 499,000 available (1% used).
+If your system is running low on inodes, you may need to clean up unnecessary files or consider increasing the inode limit (this depends on how the file system was initially formatted).
+
 ---
 
 ## Key Points to Remember About Inodes
