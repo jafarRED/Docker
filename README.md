@@ -152,5 +152,7 @@ Docker revolutionized the IT industry by providing a lightweight, efficient, and
 
 ## Linux Notes
 [ 📌 Linux_Basic_Commands.md](Linux_Basic_Commands.md)
+
 [ 📌Linux_Basic_File_Permissions.md](Linux_Basic_File_Permissions.md)
+
 [ 📌Linux_Basics_Inode_and_Links.md](Linux_Basics_Inode_and_Links.md)
