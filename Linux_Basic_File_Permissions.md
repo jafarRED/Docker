@@ -243,7 +243,7 @@ chmod 700 script.sh
 -rwx------  1 user group 4096 Jan 12 10:24 script.sh
 ```
 
-## Comparison Table for Better Understanding
+## Comparison Table 
 | Binary Representation | Octal Value | Meaning            |
 |------------------------|-------------|--------------------|
 | 000                    | 0           | No permissions     |
