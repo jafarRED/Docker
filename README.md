@@ -136,15 +136,21 @@ Docker revolutionized the IT industry by providing a lightweight, efficient, and
 
 ### Next Steps:
 
-[ 📌 Installing Docker and running your first container.](./Docker_Installation.md)
+[ 🛠️ Installing Docker and running your first container.](./Docker_Installation.md)
+[ 📖 Basics of Docker](Basics of Docker.md)
 
-[ 📌 Understanding Docker Images, Dockerfiles, and Docker Compose part1.](Custom_Image_part-1.md) 
+[ 🎯 Understanding Docker Images, Dockerfiles, and Docker Compose part1.](Custom_Image_part-1.md) 
 
-[ 📌 Understanding Docker Images, Dockerfiles, and Docker Compose part2.](Custom_Image_Dockerfile_part-2.md) 
+[ 🚀 Understanding Docker Images, Dockerfiles, and Docker Compose part2.](Custom_Image_Dockerfile_part-2.md) 
 
-[ 📌 Best_Practices_Dockerfile])Best_Practices_Dockerfile.md)
+[ 📌 Best_Practices_Dockerfile](Best_Practices_Dockerfile.md)
+
 
 3. Managing containers and volumes for data persistence.
 4. Using Docker in CI/CD pipelines.
 
 
+## Linux Notes
+[ 📌 Linux_Basic_Commands.md](Linux_Basic_Commands.md)
+[ 📌Linux_Basic_File_Permissions.md](Linux_Basic_File_Permissions.md)
+[ 📌Linux_Basics_Inode_and_Links.md](Linux_Basics_Inode_and_Links.md)
