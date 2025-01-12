@@ -152,10 +152,8 @@ Port mapping is fundamental when working with Docker containers to expose servic
 
 ---
 
-Certainly! Here's the latest response formatted in Markdown syntax that you can paste directly into a `.md` file for GitHub:
 
-```markdown
-# Docker Volume Mapping: Notes for Students
+# Docker Volume Mapping
 
 ## **What is Docker Volume Mapping?**
 
@@ -292,7 +290,4 @@ docker run -d -v /home/user/app:/app node
 - **Tmpfs Mounts** store data temporarily in memory and are deleted when the container stops.
 
 By using Docker volume mapping, you can ensure that important data persists across container lifecycles, share data between containers, and improve your development workflow.
-```
 
-This Markdown file can now be used directly in GitHub or any other platform that supports `.md` files. Let me know if you need any more changes!
-   ```
