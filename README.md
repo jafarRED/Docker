@@ -148,11 +148,12 @@ Docker revolutionized the IT industry by providing a lightweight, efficient, and
 
 
 [🚀 Managing volumes for data persistence & Port Mappping.](Docker_Port_Volume_Mapping.md)
+
 4. Using Docker in CI/CD pipelines.
 
 
 ## Linux Notes
-[ 📌 Linux_Basic_Commands.md](Basics _of_Docker.md)
+[ 📌 Linux_Basic_Commands](Basics _of_Docker.md)
 
 [ 📌Linux_Basic_File_Permissions.md](Linux_Basic_File_Permissions.md)
 
