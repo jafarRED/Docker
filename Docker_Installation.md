@@ -1,5 +1,5 @@
 
-# Docker Installation Notes
+# Docker Installation Notes ( Ubuntu )
 
 Before installing Docker, you need to understand some important security considerations, especially when dealing with firewall settings.
 
@@ -94,4 +94,4 @@ If the installation is successful, Docker will display a **"Hello from Docker!"*
    - Follow the instructions above to install Docker on your Ubuntu system, including adding the GPG key, repository, and installing Docker's components.
 
 
-Source: https://docs.docker.com/ , chatgpt
+Source:[ https://docs.docker.com/](https://docs.docker.com/engine/install/ubuntu/) , chatgpt
