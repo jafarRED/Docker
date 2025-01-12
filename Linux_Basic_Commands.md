@@ -1,5 +1,7 @@
 
 # Linux Commands Cheat Sheet
+![image](https://github.com/user-attachments/assets/8c802e84-b5ff-4006-9409-b9c661217de6)
+
 
 ## 1. File and Directory Commands
 | Command | Description |
