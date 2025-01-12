@@ -152,3 +152,132 @@ chown [owner]:[group] <file>
   - **Owner**: `rwx` = 7 (4+2+1)
   - **Group**: `r-x` = 5 (4+0+1)
   - **Others**: `r-x` = 5 (4+0+1)
+
+
+
+---
+
+
+# Understanding Permissions in Octal Format
+
+Each permission (`r`, `w`, `x`) is represented as a binary digit (`1` or `0`) and mapped to a specific numeric value. Here’s the breakdown:
+
+| Permission | Binary Representation | Octal Value |
+|------------|------------------------|-------------|
+| ---        | 000                    | 0           |
+| --x        | 001                    | 1           |
+| -w-        | 010                    | 2           |
+| -wx        | 011                    | 3           |
+| r--        | 100                    | 4           |
+| r-x        | 101                    | 5           |
+| rw-        | 110                    | 6           |
+| rwx        | 111                    | 7           |
+
+## Breaking It Down: `rwx`
+- `r` (read): Assigned the value **4**
+- `w` (write): Assigned the value **2**
+- `x` (execute): Assigned the value **1**
+
+The octal value is the sum of these permissions:
+- For `rwx`: 4 + 2 + 1 = **7**
+- For `rw-`: 4 + 2 + 0 = **6**
+- For `r-x`: 4 + 0 + 1 = **5**
+
+## Applying Octal Numbers to Permission Groups
+File permissions are divided into three groups:
+1. **Owner**
+2. **Group**
+3. **Others**
+
+Each group gets its own octal value. For example:
+- `rwxr-xr--` → **Owner**: `rwx` (7), **Group**: `r-x` (5), **Others**: `r--` (4)
+- Octal representation: **754**
+
+## Examples
+
+### Example 1: `chmod 755`
+**Permissions:**
+- **Owner**: `rwx` (7) → Can read, write, and execute.
+- **Group**: `r-x` (5) → Can read and execute, but not write.
+- **Others**: `r-x` (5) → Can read and execute, but not write.
+
+**Command:**
+```bash
+chmod 755 file.txt
+```
+
+**Result:**
+```bash
+-rwxr-xr-x  1 user group 4096 Jan 12 10:24 file.txt
+```
+
+### Example 2: `chmod 644`
+**Permissions:**
+- **Owner**: `rw-` (6) → Can read and write.
+- **Group**: `r--` (4) → Can only read.
+- **Others**: `r--` (4) → Can only read.
+
+**Command:**
+```bash
+chmod 644 file.txt
+```
+
+**Result:**
+```bash
+-rw-r--r--  1 user group 4096 Jan 12 10:24 file.txt
+```
+
+### Example 3: `chmod 700`
+**Permissions:**
+- **Owner**: `rwx` (7) → Full permissions (read, write, execute).
+- **Group**: `---` (0) → No permissions.
+- **Others**: `---` (0) → No permissions.
+
+**Command:**
+```bash
+chmod 700 script.sh
+```
+
+**Result:**
+```bash
+-rwx------  1 user group 4096 Jan 12 10:24 script.sh
+```
+
+## Comparison Table for Better Understanding
+| Binary Representation | Octal Value | Meaning            |
+|------------------------|-------------|--------------------|
+| 000                    | 0           | No permissions     |
+| 001                    | 1           | Execute only       |
+| 010                    | 2           | Write only         |
+| 011                    | 3           | Write and execute  |
+| 100                    | 4           | Read only          |
+| 101                    | 5           | Read and execute   |
+| 110                    | 6           | Read and write     |
+| 111                    | 7           | Full permissions   |
+
+## Practical Usage of Octal Permissions
+
+### 1. Read-Only for Everyone
+To make a file readable by everyone but writable only by the owner:
+```bash
+chmod 644 file.txt
+```
+**Permissions:** `rw-r--r--`
+
+### 2. Executable Script for the Owner
+To allow only the owner to execute a script:
+```bash
+chmod 700 script.sh
+```
+**Permissions:** `rwx------`
+
+### 3. Shared Directory
+To allow everyone to read, write, and execute within a directory:
+```bash
+chmod 777 shared_dir
+```
+**Permissions:** `rwxrwxrwx`
+
+## Why Use Octal Format?
+Octal format is concise and precise. Instead of setting permissions individually with symbolic methods (e.g., `chmod u+x`), you can define all permissions at once using numbers.
+ 
