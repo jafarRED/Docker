@@ -92,3 +92,6 @@ If the installation is successful, Docker will display a **"Hello from Docker!"*
    - Docker works with `iptables-nft` and `iptables-legacy`, but not with `nft`-based rules. Always ensure that firewall rules are placed in the `DOCKER-USER` chain for proper integration.
 3. **Installation Steps:**
    - Follow the instructions above to install Docker on your Ubuntu system, including adding the GPG key, repository, and installing Docker's components.
+
+
+Source: https://docs.docker.com/ , chatgpt
