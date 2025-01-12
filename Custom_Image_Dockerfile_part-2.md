@@ -172,8 +172,15 @@ This builds the Docker image and tags it as `my-python-app`.
 ### Using CMD and ENTRYPOINT Together
 
 When used together:
-- `ENTRYPOINT` defines the main command.
-- `CMD` provides default arguments to that command. These arguments can be overridden by the user at runtime.
+- `**ENTRYPOINT**` defines the main command.
+- `**CMD**` provides default arguments to that command. These arguments can be overridden by the user at runtime.
+
+**ENTRYPOINT** is the main command that is executed when the container starts (in this case, python). The CMD provides default arguments for that command (in this case, app.py).
+
+Scenario 1: If you run docker run <image>, it will execute python app.py (because CMD provides the default argument).
+Scenario 2: If you run docker run <image> application.py, it will execute python application.py (because the argument passed will override CMD).
+
+Flexibility: With this setup, you ensure that the container will always run python as the command, but you give flexibility to change which script (app.py or application.py) to run based on the user's input.
 
 **Example:**
 ```dockerfile
@@ -194,7 +201,7 @@ This configuration ensures that the container always runs `python`, but the scri
   ```
   Run with:
   ```bash
-  docker run <image_name> another_script.py
+  docker run -p 8080:8080 <image_name>  python another_script.py
   ```
   This will execute `python another_script.py`.
 
