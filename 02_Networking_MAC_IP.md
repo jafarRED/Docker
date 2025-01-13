@@ -217,6 +217,124 @@
 
 ---
 
+Here is the detailed explanation you provided in **Markdown** syntax:
+
+```markdown
+# IPv4 Addressing
+
+---
+
+## **2. IPv4 Structure**
+- IPv4 addresses consist of **32 bits**, divided into 4 groups called **octets**.
+- Each octet contains 8 bits, and the octets are separated by dots.
+  
+**Example:** `192.168.0.1`
+
+### **Binary Equivalent:**
+```
+192.168.0.1 → 11000000.10101000.00000000.00000001
+```
+
+---
+
+### **Conversion: Decimal to Binary**
+
+To convert `192.168.0.1` into binary:
+1. Convert each octet to an 8-bit binary number:
+   - `192 → 11000000`
+   - `168 → 10101000`
+   - `0 → 00000000`
+   - `1 → 00000001`
+   
+**Final Binary:** `11000000.10101000.00000000.00000001`
+
+---
+
+### **Binary to Decimal**
+
+To convert `11000000.10101000.00000000.00000001` to decimal:
+1. Break it into octets: `11000000`, `10101000`, `00000000`, `00000001`.
+2. Convert each octet to decimal:
+   - `11000000 → 192`
+   - `10101000 → 168`
+   - `00000000 → 0`
+   - `00000001 → 1`
+   
+**Final Decimal:** `192.168.0.1`
+
+---
+
+## **3. IPv4 Components**
+IPv4 addresses are split into two parts:
+1. **Network ID**: Identifies the network.
+2. **Host ID**: Identifies devices within the network.
+
+---
+
+## **4. Classes of IPv4 Addresses**
+IPv4 addresses are categorized into five classes (A, B, C, D, E), based on the value of the first octet:
+
+| **Class** | **Range of First Octet** | **Network/Host Bits**               | **Total Hosts**    |
+|-----------|--------------------------|-------------------------------------|--------------------|
+| **A**     | 1 - 126                  | Network: 8 bits, Host: 24 bits      | 16,777,214         |
+| **B**     | 128 - 191                | Network: 16 bits, Host: 16 bits     | 65,534             |
+| **C**     | 192 - 223                | Network: 24 bits, Host: 8 bits      | 254                |
+| **D**     | 224 - 239                | Reserved for multicast              | Not applicable     |
+| **E**     | 240 - 255                | Experimental/Reserved               | Not applicable     |
+
+---
+
+### **Detailed Explanation**
+
+#### **Class A**
+- **First Octet:** Reserved for the **network ID**.
+- **Remaining 3 Octets:** Reserved for **host IDs**.
+- **Example:** `10.0.0.1` 
+  - Network: `10`
+  - Host: `0.0.1`
+
+#### **Class B**
+- **First Two Octets:** Reserved for the **network ID**.
+- **Remaining Two Octets:** Reserved for **host IDs**.
+- **Example:** `172.16.0.1`
+  - Network: `172.16`
+  - Host: `0.1`
+
+#### **Class C**
+- **First Three Octets:** Reserved for the **network ID**.
+- **Last Octet:** Reserved for the **host ID**.
+- **Example:** `192.168.1.1`
+  - Network: `192.168.1`
+  - Host: `1`
+
+#### **Class D** 
+- Used for **multicast communication**.
+  
+#### **Class E**
+- Reserved for **experimental purposes**.
+
+---
+
+## **5. Private IP Address Ranges**
+Private IP addresses are reserved for use within local networks (LANs) and **cannot be routed on the internet**.
+
+| **Class** | **Private IP Range**                       |
+|-----------|--------------------------------------------|
+| **A**     | `10.0.0.0 – 10.255.255.255`                |
+| **B**     | `172.16.0.0 – 172.31.255.255`              |
+| **C**     | `192.168.0.0 – 192.168.255.255`           |
+
+These addresses are used in **home networks, corporate LANs, and other internal networks**.
+
+---
+
+## **6. Maximum Hosts Per Network**
+The number of hosts in a network depends on the number of bits in the **host ID**.
+
+### **Formula:**
+```
+Max Hosts = (2^Number of Host Bits) - 2
+```
 The subtraction accounts for:
 1. **Network Address:** Reserved to identify the network.
 2. **Broadcast Address:** Reserved to send data to all devices in the network.
@@ -248,9 +366,4 @@ The subtraction accounts for:
   
 ---
 
-
-
-3. **Security:**
-   - MAC filtering can be used to restrict access to a network based on device MAC addresses.
-
----
+```
