@@ -215,6 +215,41 @@
 2. **ARP (Address Resolution Protocol):**
    - Converts IP addresses to MAC addresses for local delivery.
 
+---
+
+The subtraction accounts for:
+1. **Network Address:** Reserved to identify the network.
+2. **Broadcast Address:** Reserved to send data to all devices in the network.
+
+| **Class** | **Host Bits** | **Max Hosts** |
+|-----------|---------------|---------------|
+| **A**     | 24            | 16,777,214    |
+| **B**     | 16            | 65,534        |
+| **C**     | 8             | 254           |
+
+---
+
+## **7. Special IPv4 Addresses**
+
+### **a. Loopback Address (`127.0.0.1`)**
+- The **Loopback Address** is reserved for **testing and diagnostics** on a local machine.
+- Represents the device itself.
+  
+#### **Why Use It?**
+- To check if the **TCP/IP stack** is configured properly.
+- Allows testing network functionalities without requiring a physical connection.
+
+### **b. Broadcast Address**
+- Used to send data to **all devices** in a network.
+- **Example:** `192.168.1.255` in a `192.168.1.0/24` network.
+
+### **c. Default Gateway**
+- The **IP address** of the **router** in a LAN, used to send data outside the local network.
+  
+---
+
+
+
 3. **Security:**
    - MAC filtering can be used to restrict access to a network based on device MAC addresses.
 
