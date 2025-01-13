@@ -217,9 +217,6 @@
 
 ---
 
-Here is the detailed explanation you provided in **Markdown** syntax:
-
-```markdown
 # IPv4 Addressing
 
 ---
@@ -366,4 +363,3 @@ The subtraction accounts for:
   
 ---
 
-```
