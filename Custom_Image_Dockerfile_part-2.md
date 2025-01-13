@@ -58,6 +58,7 @@ A Dockerfile is a text file that contains a set of instructions to automate the 
 - **Example:**
   ```dockerfile
   CMD ["python", "app.py"]
+This runs `python app.py` when the container starts.
 
      ** Example-2 **
   ```  dockerfile
@@ -72,8 +73,6 @@ A Dockerfile is a text file that contains a set of instructions to automate the 
     The earlier CMD instructions are completely ignored.
 
   ```
-  This runs `python app.py` when the container starts.
-
 ---
 
 ### 7. `ENTRYPOINT`
