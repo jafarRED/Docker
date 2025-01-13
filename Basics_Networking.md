@@ -5,6 +5,8 @@ The OSI (Open Systems Interconnection) model is a framework that standardizes ho
 ---
 
 ## **7 Layers of the OSI Model (with Real-Life Analogy: Sending a Letter)**
+![image](https://github.com/user-attachments/assets/f9ff5aed-157c-4aaa-b8cb-3e10b9bcf687)
+*Image Source: [Cisco Blog](https://blogs.cisco.com/cloud/an-osi-model-for-cloud)*
 
 ### 1. **Physical Layer (Layer 1)**
 - **Function:** Handles the physical transmission of raw data (bits) through cables, switches, and signals.
