@@ -51,7 +51,15 @@ A Dockerfile is a text file that contains a set of instructions to automate the 
   ```dockerfile
   WORKDIR /app
   ```
-   ** Example **
+---
+
+### 6. `CMD`
+- Specifies the command to execute when the container starts. Only one `CMD` instruction is allowed per Dockerfile.
+- **Example:**
+  ```dockerfile
+  CMD ["python", "app.py"]
+
+     ** Example-2 **
   ```  dockerfile
     FROM ubuntu:20.04
 
@@ -63,13 +71,6 @@ A Dockerfile is a text file that contains a set of instructions to automate the 
     Only the **last CMD** (i.e., CMD ["echo", "Third CMD"]) is executed when the container runs.
     The earlier CMD instructions are completely ignored.
 
----
-
-### 6. `CMD`
-- Specifies the command to execute when the container starts. Only one `CMD` instruction is allowed per Dockerfile.
-- **Example:**
-  ```dockerfile
-  CMD ["python", "app.py"]
   ```
   This runs `python app.py` when the container starts.
 
