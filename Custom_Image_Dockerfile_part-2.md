@@ -51,6 +51,17 @@ A Dockerfile is a text file that contains a set of instructions to automate the 
   ```dockerfile
   WORKDIR /app
   ```
+   ** Example **
+  ```  dockerfile
+    FROM ubuntu:20.04
+
+    CMD ["echo", "First CMD"]
+    CMD ["echo", "Second CMD"]
+    CMD ["echo", "Third CMD"]
+  ```
+ ** What Happens?**
+    Only the **last CMD** (i.e., CMD ["echo", "Third CMD"]) is executed when the container runs.
+    The earlier CMD instructions are completely ignored.
 
 ---
 
