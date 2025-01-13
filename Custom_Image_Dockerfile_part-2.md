@@ -189,6 +189,7 @@ When used together:
 **ENTRYPOINT** is the main command that is executed when the container starts (in this case, python). The CMD provides default arguments for that command (in this case, app.py).
 
 Scenario 1: If you run docker run <image>, it will execute python app.py (because CMD provides the default argument).
+
 Scenario 2: If you run docker run <image> application.py, it will execute python application.py (because the argument passed will override CMD).
 
 Flexibility: With this setup, you ensure that the container will always run python as the command, but you give flexibility to change which script (app.py or application.py) to run based on the user's input.
