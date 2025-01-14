@@ -302,14 +302,14 @@ In **half-duplex** communication, data transmission can only happen in **one dir
 ### Representation:
 
 
-+--------+        +--------+
+
 | Sender |------->| Receiver|
-+--------+        +--------+
 
 
-+--------+        +--------+
-| Receiver|<------| Sender |
-+--------+        +--------+
+
+|---------|---------|---------|
+| Receiver|<--------| Sender  |
+|---------|---------|---------|
 
 - **Sender** sends data to **Receiver**.
 - **Receiver** sends data back to **Sender**.
@@ -325,9 +325,9 @@ In **full-duplex** communication, data can be transmitted in **both directions s
 ### Representation:
 
 
-+--------+ <-------> +--------+
-| Sender |           | Receiver|
-+--------+           +--------+
+|--------|---------|---------|
+| Sender |<------->| Receiver|
+|--------|---------|---------|
 
 
 - **Sender** can send data while simultaneously **Receiver** can send data back.
