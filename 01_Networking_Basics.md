@@ -187,81 +187,90 @@ Think of a hub as a **loudspeaker**. When you speak into it, everyone in the roo
 
 A **Bridge** is a networking device used to connect multiple Local Area Networks (LANs) into a larger network. It operates at the Data Link Layer (Layer 2) and is used to filter traffic between the networks based on MAC addresses.
 
-**Example with MAC Address Table**
-Let's assume the following network setup:
+# Bridge Device and MAC Address Table Example
 
-LAN-1: Lap1, Lap2, Lap3
+A **bridge** is a networking device that connects devices within the same Local Area Network (LAN) and filters traffic based on MAC addresses. It operates at Layer 2 (Data Link Layer) of the OSI model.
 
-LAN-2: Lap4, Lap5, Lap6
+## Example with MAC Address Table
 
-Bridge: Connecting LAN-1 and LAN-2
+- Devices: Lap1, Lap2, Lap3, Lap4, Lap5, Lap6
+- Bridge connects all devices within the same LAN.
 
-The MAC address table of the bridge will initially be empty. As devices send traffic, the bridge learns the MAC addresses and updates its table.
+### Initial Communication (Learning Phase)
 
-![image](https://github.com/user-attachments/assets/8dc4df81-4032-4da8-9463-3943a3964aee)
+1. **Lap1** sends a message to **Lap2**.
+   - The bridge does not know **Lap2's** MAC address, so it broadcasts the message to all devices.
+   - **Lap2** responds, and the bridge learns that **Lap1** is on port-1 and **Lap2** is on port-1.
+   
+   **MAC Address Table (Before Learning):**
 
+   | MAC Address         | Port  |
+   |---------------------|-------|
+   | 00:11:22:33:44:01   | Port-1|
+   | 00:11:22:33:44:02   | Port-1|
 
+2. **Lap1** sends a message to **Lap4**.
+   - The bridge broadcasts the message as it doesn't know **Lap4's** MAC address.
+   - **Lap4** responds, and the bridge learns that **Lap4** is on port-2.
 
-### 1. First Communication (Learning Phase)
+   **MAC Address Table (After Learning):**
 
-- **Scenario**: `Lap1` in **LAN-1** sends a message to `Lap2` (also in **LAN-1**).
-- The bridge doesn't know where `Lap2`'s MAC address is, so it **broadcasts the message to both LANs**.
-  
-#### MAC Address Table (Before)
-| MAC Address        | Port  |  
-|--------------------|-------|  
-|                    |       |  
+   | MAC Address         | Port  |
+   |---------------------|-------|
+   | 00:11:22:33:44:01   | Port-1|
+   | 00:11:22:33:44:02   | Port-1|
+   | 00:11:22:33:44:04   | Port-2|
 
-- After receiving the broadcast, `Lap2` responds, and the bridge learns that `Lap1`'s MAC address is connected to **port-1** (since `Lap1` is in LAN-1), and `Lap2`'s MAC address is connected to **port-1** (since `Lap2` is also in LAN-1).
+### Subsequent Communication (Filtered Traffic)
 
-#### MAC Address Table (After Learning)
-| MAC Address        | Port  |  
-|--------------------|-------|  
-| 00:11:22:33:44:01  | Port-1 |  
-| 00:11:22:33:44:02  | Port-1 |  
+1. **Lap1** sends a message to **Lap2**.
+   - The bridge already knows **Lap2's** MAC address and forwards the message directly to **Lap2** on Port-1.
+   
+   **MAC Address Table:**
 
-At this stage, the bridge knows where `Lap1` and `Lap2` are located (both in **LAN-1**), but doesn't yet know about `Lap3`, `Lap4`, `Lap5`, or `Lap6`.
+   | MAC Address         | Port  |
+   |---------------------|-------|
+   | 00:11:22:33:44:01   | Port-1|
+   | 00:11:22:33:44:02   | Port-1|
+   | 00:11:22:33:44:04   | Port-2|
 
----
-
-### 2. Second Communication (Learning Phase Continues)
-
-- **Scenario**: `Lap1` now sends a message to `Lap4` (in **LAN-2**).
-- The bridge doesn't know `Lap4`'s MAC address yet, so it **broadcasts the message** to both **LAN-1** and **LAN-2**.
-  
-#### MAC Address Table (Before)
-| MAC Address        | Port  |  
-|--------------------|-------|  
-| 00:11:22:33:44:01  | Port-1 |  
-| 00:11:22:33:44:02  | Port-1 |  
-
-- `Lap4` in **LAN-2** responds. The bridge then learns that `Lap4`'s MAC address is connected to **port-2** (since `Lap4` is in **LAN-2**).
-
-#### MAC Address Table (After Learning)
-| MAC Address        | Port  |  
-|--------------------|-------|  
-| 00:11:22:33:44:01  | Port-1 |  
-| 00:11:22:33:44:02  | Port-1 |  
-| 00:11:22:33:44:04  | Port-2 |  
+2. **Lap1** sends a message to **Lap4**.
+   - The bridge knows **Lap4's** MAC address and forwards the message directly to **Lap4** on Port-2.
 
 ---
 
-### 3. Subsequent Communication (Filtered Traffic)
+This method reduces unnecessary network traffic by sending data only where it's needed, instead of broadcasting to all devices.
 
-- **Scenario 1**: `Lap1` sends a message to `Lap2` (both in **LAN-1**).
-  - The bridge already knows that `Lap2` is connected to **port-1**.
-  - The bridge **does not broadcast** to **LAN-2** anymore. It simply forwards the message to **LAN-1** (to `Lap2`).
+---
 
-#### MAC Address Table
-| MAC Address        | Port  |  
-|--------------------|-------|  
-| 00:11:22:33:44:01  | Port-1 |  
-| 00:11:22:33:44:02  | Port-1 |  
-| 00:11:22:33:44:04  | Port-2 |  
+## Difference Between Hub and Bridge
 
-- **Scenario 2**: `Lap1` sends a message to `Lap4` (in **LAN-2**).
-  - The bridge already knows that `Lap4` is connected to **port-2**.
-  - The bridge **does not broadcast** to **LAN-1** anymore. It simply forwards the message to **LAN-2** (to `Lap4`).
+| Feature           | Hub                       | Bridge                           |
+|-------------------|---------------------------|----------------------------------|
+| **Function**      | Repeats signals to all devices. | Filters traffic and forwards frames based on MAC addresses. |
+| **Layer**         | Layer 1 (Physical Layer)  | Layer 2 (Data Link Layer)       |
+| **Traffic Management**| Broadcasts to all devices. | Forwards traffic only to the relevant network segment. |
+| **Efficiency**    | Less efficient, causes congestion. | More efficient, reduces collisions and traffic. |
+| **MAC Address Table** | Does not maintain a MAC address table. | Maintains a MAC address table for learning and forwarding. |
+
+---
+
+## Understanding Collision Domains with Bridges
+
+A **collision domain** is a network segment where devices can cause data packet collisions if they transmit at the same time.
+
+### Before Using a Bridge
+All devices in the same LAN are in a single collision domain, meaning if two devices send data simultaneously, a collision will occur.
+
+### After Introducing a Bridge
+The bridge divides the network into separate collision domains:
+- Devices in **Port-1** (e.g., Lap1, Lap2) are in one collision domain.
+- Devices in **Port-2** (e.g., Lap4, Lap5) are in another collision domain.
+
+This reduces the chances of collision and improves network performance. Devices on one side of the bridge can transmit data without affecting devices on the other side.
+
+---
+
 
 ---
 
@@ -431,66 +440,18 @@ In short:
 These differences directly impact **network performance**, **collision domains**, and **how data is forwarded** within networks.
 
 
----
-
-# Understanding Collision Domains with Bridges
-
-## Collision Domain Explanation
-
-A **collision domain** is a network segment where data packets can "collide" if two devices try to send data at the same time on the same shared medium.
-
-### Collision Domain in the Context of a Bridge
-
-1. **Before using a bridge**: All devices in the same LAN are in a **single collision domain**, meaning they share the same bandwidth. If two devices send data at the same time, a **collision** occurs, causing data loss and requiring retransmission.
-
-2. **After introducing a bridge**: The bridge divides the network into **separate collision domains**. Each segment (LAN-1, LAN-2) is now its own collision domain. This means that:
-   - **LAN-1** has its own collision domain.
-   - **LAN-2** has its own collision domain.
-
-Devices in **LAN-1** can transmit simultaneously with devices in **LAN-2** without causing collisions.
-
-### Why is this important?
-
-- **Before the bridge**: All devices in the network share the same collision domain. If one device transmits, others must wait. This can lead to congestion and poor performance.
-- **After the bridge**: The network is divided into separate collision domains, reducing the chances of collisions and improving overall network efficiency.
-
-### The Importance of Collision Domains
-
-- By using a bridge, the network can **scale better**. The bridge isolates collision domains, ensuring that larger networks can function smoothly without data collisions.
-- It improves **performance** by reducing **network congestion**.
-
----
-
-## Simple Example of Collision Domains in a Bridge Setup
-
-Let’s go back to your example:
-
-- **LAN-1** has `Lap1`, `Lap2`, `Lap3`.
-- **LAN-2** has `Lap4`, `Lap5`, `Lap6`.
-
-### Without a Bridge:
-
-- All devices (Lap1, Lap2, Lap3, Lap4, Lap5, Lap6) are in a single collision domain. If **Lap1** and **Lap4** try to send data at the same time, their packets will **collide**.
-
-### With a Bridge:
-
-- **LAN-1** (with `Lap1`, `Lap2`, `Lap3`) is in **collision domain 1**.
-- **LAN-2** (with `Lap4`, `Lap5`, `Lap6`) is in **collision domain 2**.
-
-Now, **Lap1** and **Lap4** can send data at the same time without causing collisions, as they are in different collision domains.
-
 
 ---
 **Bridge**:
-  - A bridge connects two or more network segments (usually two LANs) and forwards frames between them based on MAC addresses.
+  - A bridge connects two or more network segments  and forwards frames between them based on MAC addresses.
   - It operates at Layer 2 (Data Link Layer) of the OSI model.
   - A bridge typically has two ports, one for each LAN segment it connects.
     
 **Switch**:
   - A switch is essentially a multiport bridge because it performs the same function as a bridge—forwarding frames based on MAC addresses—but it has more ports.
   - A switch operates at Layer 2 (Data Link Layer) like a bridge, but it is designed to handle multiple devices, often within the same network.
-  - Unlike a bridge, which connects only two segments, a switch can connect many devices within a network (multiple LAN segments), making it a multiport version of the bridge.
-  - A switch creates a collision domain for each of its ports, reducing collisions compared to a hub, and can also perform learning (storing MAC addresses in its MAC address table).
+  - Unlike a bridge, which connects only two segments, a switch can connect many devices within a network , making it a multiport version of the bridge.
+  - A switch creates a collision domain for each of its ports(Ex: For 23 port switchm 24 separate collision domains: Each of the 24 laptops has its own dedicated collision domain, meaning they can all send data at the same time without interfering with each other.), reducing collisions compared to a hub, and can also perform learning (storing MAC addresses in its MAC address table).
   - So, while both bridges and switches are Layer 2 devices that forward data based on MAC addresses, the main difference is that a switch provides more ports and is designed for more complex networking.
 
 **In short:**
