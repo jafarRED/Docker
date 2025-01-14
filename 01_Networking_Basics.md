@@ -290,6 +290,84 @@ This method helps to **reduce unnecessary network traffic** by only sending data
 ---
 # Hub, Bridge, and Router: Duplex Modes and Differences
 
+
+Here’s the revised version of your explanation with the corrections included and sender/receiver in boxes for better clarity in **Markdown** syntax:
+
+```markdown
+# Duplex Modes and Device Functions
+
+## Half-Duplex Communication
+
+In **half-duplex** communication, data transmission can only happen in **one direction** at a time. At any given moment, the device can either **send** or **receive** data, but **not both** simultaneously.
+
+### Representation:
+
+```
++--------+        +--------+
+| Sender |------->| Receiver|
++--------+        +--------+
+
++--------+        +--------+
+| Receiver|<------| Sender |
++--------+        +--------+
+```
+
+- **Sender** sends data to **Receiver**.
+- **Receiver** sends data back to **Sender**.
+
+In half-duplex systems, only **one direction** is active at any time—either sending or receiving, not both. This is why devices like **hubs** are considered half-duplex, as they allow all devices to send and receive data, but not at the same time.
+
+---
+
+## Full-Duplex Communication
+
+In **full-duplex** communication, data can be transmitted in **both directions simultaneously**. This means that devices can send and receive data at the same time.
+
+### Representation:
+
+```
++--------+<------->+--------+
+| Sender |         | Receiver|
++--------+         +--------+
+```
+
+- **Sender** can send data while simultaneously **Receiver** can send data back.
+
+Devices like **bridges** and **routers** operate in full-duplex mode, enabling more efficient communication without waiting for one side to finish before the other can start.
+
+---
+
+## Key Differences Between Half-Duplex and Full-Duplex:
+
+| **Mode**         | **Description**                                                           | **Devices**                  |
+|------------------|---------------------------------------------------------------------------|------------------------------|
+| **Half-Duplex**  | Data can only flow in **one direction** at a time.                        | **Hubs** (Layer 1), Radios, Walkie-Talkies |
+| **Full-Duplex**  | Data can flow in **both directions simultaneously**.                      | **Bridges** (Layer 2), **Routers** (Layer 3), Telephones |
+
+---
+
+## Summary of Device Characteristics
+
+| **Device**  | **Duplex Mode** | **Function**                                       | **OSI Layer**     |
+|-------------|-----------------|---------------------------------------------------|-------------------|
+| **Hub**     | Half-Duplex     | Connects devices in a LAN, **broadcasts** data.   | Physical Layer (Layer 1) |
+| **Bridge**  | Full-Duplex     | Connects and segments LANs, reduces collisions.   | Data Link Layer (Layer 2) |
+| **Router**  | Full-Duplex     | Routes data between different networks or subnets. | Network Layer (Layer 3) |
+
+---
+
+In short:
+- **Half-Duplex**: One-way data transfer at any given time.
+- **Full-Duplex**: Two-way data transfer at the same time.
+
+These concepts play a crucial role in network efficiency, device capabilities, and how data is transmitted in a network.
+```
+
+This markdown explanation is structured to present the concepts of half-duplex and full-duplex, with better clarity and diagrams for understanding. It also includes the correct descriptions and appropriate device names.
+
+
+
+
 ## 1. **Hub**
 - **Duplex Mode**: **Half-Duplex**
 - **Explanation**: 
