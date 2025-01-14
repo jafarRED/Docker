@@ -8,6 +8,45 @@ The OSI (Open Systems Interconnection) model is a framework that standardizes ho
 ![image](https://github.com/user-attachments/assets/f9ff5aed-157c-4aaa-b8cb-3e10b9bcf687)
 *Image Source: [Cisco Blog](https://blogs.cisco.com/cloud/an-osi-model-for-cloud)*
 
+
+Def:
+
+  **Host-to-Host Communication (Transport Layer - Layer 4)**
+  
+  **Definition**: Host-to-host communication ensures reliable delivery of data between two devices (hosts) over a network. It focuses on flow control, error detection, and message segmentation.
+  
+   - **Functionality:**
+   - **Reliable Communication:** Ensures that data is transmitted without loss or duplication.
+   - **Flow Control:** Prevents a fast sender from overwhelming a slow receiver.
+   - **Segmentation/Reassembly:** Divides large messages into smaller packets and reassembles them at the destination.
+   - **Key Protocols:**
+      - TCP (Transmission Control Protocol): Provides reliable communication with acknowledgment, sequencing, and retransmission of lost packets.
+      - UDP (User Datagram Protocol): Offers faster but unreliable data transfer, suitable for real-time applications like streaming.
+  **Example:** When you download a file, the Transport Layer ensures that all pieces of the file arrive in the correct order.
+---
+
+**Node-to-Node Connectivity**
+While end-to-end communication is the ultimate goal, it is achieved through node-to-node communication at the lower layers of the OSI model (Layers 1–3). Each intermediate node (like switches, routers, or other devices) plays a role in forwarding the data until it reaches the final destination.
+
+Key Points:
+**Physical Layer (Layer 1):**
+
+Responsible for the actual transmission of raw bits across physical connections (e.g., cables, wireless signals).
+Provides node-to-node connectivity between directly connected devices (e.g., PC to switch).
+
+Data Link Layer (Layer 2):
+
+Ensures error-free communication between two directly connected devices.
+Uses MAC addresses to identify nodes within the same local network.
+Example: Communication between a PC and a switch or between a switch and another switch within a LAN.
+
+Network Layer (Layer 3):
+
+Handles routing of data packets between devices across different networks.
+Uses IP addresses for identifying devices and ensuring data reaches the correct destination.
+Example: Communication between a router and another router or between a PC and a router.
+
+
 ### 1. **Physical Layer (Layer 1)**
 - **Function:** Handles the physical transmission of raw data (bits) through cables, switches, and signals.
 - **Analogy:** The **postman’s route** – the physical path the letter takes (by road, train, airplane).
