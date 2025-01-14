@@ -187,6 +187,17 @@ Think of a hub as a **loudspeaker**. When you speak into it, everyone in the roo
 
 A **Bridge** is a networking device used to connect multiple Local Area Networks (LANs) into a larger network. It operates at the Data Link Layer (Layer 2) and is used to filter traffic between the networks based on MAC addresses.
 
+**Example with MAC Address Table**
+Let's assume the following network setup:
+
+LAN-1: Lap1, Lap2, Lap3
+LAN-2: Lap4, Lap5, Lap6
+Bridge: Connecting LAN-1 and LAN-2
+The MAC address table of the bridge will initially be empty. As devices send traffic, the bridge learns the MAC addresses and updates its table.
+
+
+
+
 ### 1. First Communication (Learning Phase)
 
 - **Scenario**: `Lap1` in **LAN-1** sends a message to `Lap2` (also in **LAN-1**).
