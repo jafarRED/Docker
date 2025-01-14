@@ -238,7 +238,7 @@
 
 To convert `192.168.0.1` into binary:
 1. Convert each octet to an 8-bit binary number:
-   - `192 → 11000000`
+   - `192 → 11000000`  (Each digit is increased by factor of 2 As Binary is base-2)
    - `168 → 10101000`
    - `0 → 00000000`
    - `1 → 00000001`
