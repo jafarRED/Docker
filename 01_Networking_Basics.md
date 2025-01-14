@@ -191,8 +191,11 @@ A **Bridge** is a networking device used to connect multiple Local Area Networks
 Let's assume the following network setup:
 
 LAN-1: Lap1, Lap2, Lap3
+
 LAN-2: Lap4, Lap5, Lap6
+
 Bridge: Connecting LAN-1 and LAN-2
+
 The MAC address table of the bridge will initially be empty. As devices send traffic, the bridge learns the MAC addresses and updates its table.
 
 
