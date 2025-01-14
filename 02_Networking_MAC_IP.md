@@ -268,47 +268,69 @@ IPv4 addresses are split into two parts:
 
 ---
 
-## **4. Classes of IPv4 Addresses**
-IPv4 addresses are categorized into five classes (A, B, C, D, E), based on the value of the first octet:
+## 4. Classes of IPv4 Addresses
 
-| **Class** | **Range of First Octet** | **Network/Host Bits**               | **Total Hosts**    |
-|-----------|--------------------------|-------------------------------------|--------------------|
-| **A**     | 1 - 126                  | Network: 8 bits, Host: 24 bits      | 16,777,214         |
-| **B**     | 128 - 191                | Network: 16 bits, Host: 16 bits     | 65,534             |
-| **C**     | 192 - 223                | Network: 24 bits, Host: 8 bits      | 254                |
-| **D**     | 224 - 239                | Reserved for multicast              | Not applicable     |
-| **E**     | 240 - 255                | Experimental/Reserved               | Not applicable     |
+IPv4 addresses are categorized into five classes (A, B, C, D, E), based on the value of the **first octet**:
+
+
+| **Class** | **First Octet (Binary)** | **First Octet Numeric Range** | **Prefix Length** | **Network Bits/Host Bits** | **Total Hosts**       | **Number of Networks** |
+|-----------|---------------------------|-------------------------------|--------------------|---------------------------|------------------------|-------------------------|
+| **A**     | `0xxxxxxx`                | 0 - 127                      | /8                 | Network: 8 bits, Host: 24 bits | 16,777,214            | 128                     |
+| **B**     | `10xxxxxx`                | 128 - 191                    | /16                | Network: 16 bits, Host: 16 bits | 65,534                | 16,384                 |
+| **C**     | `110xxxxx`                | 192 - 223                    | /24                | Network: 24 bits, Host: 8 bits  | 254                    | 2,097,152              |
+| **D**     | `1110xxxx`                | 224 - 239                    | Not Applicable     | Reserved for Multicast       | Not Applicable         | Not Applicable         |
+| **E**     | `1111xxxx`                | 240 - 255                    | Not Applicable     | Experimental/Reserved        | Not Applicable         | Not Applicable         |
 
 ---
 
-### **Detailed Explanation**
+### Explanation of Number of Networks
 
-#### **Class A**
-- **First Octet:** Reserved for the **network ID**.
-- **Remaining 3 Octets:** Reserved for **host IDs**.
-- **Example:** `10.0.0.1` 
-  - Network: `10`
-  - Host: `0.0.1`
+- **Class A:**
+  - The first octet is reserved for the **Network ID**.
+  - With **8 bits for the Network ID**, the number of possible networks is:
+    ```
+    2^7 - 2 = 126 networks
+    ```
+    - The subtraction accounts for the reserved **0.0.0.0** and **127.0.0.0 (loopback)** addresses.
+  - **Example Network IDs:** `10.0.0.0`, `11.0.0.0`, `12.0.0.0`.
 
-#### **Class B**
-- **First Two Octets:** Reserved for the **network ID**.
-- **Remaining Two Octets:** Reserved for **host IDs**.
-- **Example:** `172.16.0.1`
-  - Network: `172.16`
-  - Host: `0.1`
+- **Class B:**
+  - The first two octets are reserved for the **Network ID**.
+  - With **14 bits for the Network ID**, the number of possible networks is:
+    ```
+    2^14 = 16,384 networks
 
-#### **Class C**
-- **First Three Octets:** Reserved for the **network ID**.
-- **Last Octet:** Reserved for the **host ID**.
-- **Example:** `192.168.1.1`
-  - Network: `192.168.1`
-  - Host: `1`
+             In Class B, the first two octets (16 bits) are used for the Network ID. **However:**
+         
+         Class B's range is limited:
+         
+         The first octet of Class B is restricted to values between 128 and 191 (binary: 10000000 to 10111111).
+         This restriction effectively fixes the first two bits of the first octet **(10)**, leaving 14 variable bits across the first and second octets to define the networks.
+    ```
+  - **Example Network IDs:** `172.16.0.0`, `172.17.0.0`, `172.18.0.0`.
 
-#### **Class D** 
-- Used for **multicast communication**.
-  
-#### **Class E**
-- Reserved for **experimental purposes**.
+- **Class C:**
+  - The first three octets are reserved for the **Network ID**.
+  - With **21 bits for the Network ID**, the number of possible networks is:
+    ```
+    2^21 = 2,097,152 networks
+    ```
+  - **Example Network IDs:** `192.168.1.0`, `192.168.2.0`, `192.168.3.0`.
+
+- **Class D and Class E:**
+  - These classes are not used for typical host addressing:
+    - **Class D** is reserved for multicast communication.
+    - **Class E** is reserved for experimental purposes.
+
+---
+
+### Additional Notes
+
+- **Class A networks** can accommodate **large-scale organizations or ISPs**, as each network can have millions of hosts.
+- **Class B networks** are suitable for **medium-sized organizations**.
+- **Class C networks** are commonly used in **small LANs** due to the limited number of hosts.
+
+
 
 ---
 
