@@ -198,6 +198,7 @@ Bridge: Connecting LAN-1 and LAN-2
 
 The MAC address table of the bridge will initially be empty. As devices send traffic, the bridge learns the MAC addresses and updates its table.
 
+![image](https://github.com/user-attachments/assets/8dc4df81-4032-4da8-9463-3943a3964aee)
 
 
 
@@ -287,11 +288,139 @@ This method helps to **reduce unnecessary network traffic** by only sending data
 | **MAC Address Table**  | Does not maintain a MAC address table.    | Maintains a MAC address table for learning and forwarding. |
 
 ---
+# Hub, Bridge, and Router: Duplex Modes and Differences
+
+## 1. **Hub**
+- **Duplex Mode**: **Half-Duplex**
+- **Explanation**: 
+  A **hub** is a simple networking device that connects multiple devices in a LAN. It operates in **half-duplex** mode, meaning that data transmission can only occur in one direction at a time. When one device sends data, all other devices on the hub must wait until the transmission is completed. If two devices try to send data simultaneously, a **collision** occurs, and the data is lost, requiring retransmission.
+
+  ### Key Characteristics of Hub:
+  - Operates at **Layer 1 (Physical Layer)** of the OSI model.
+  - **Broadcasts** data to all connected devices.
+  - **No intelligence**: Doesn't know which device to send data to.
+  - Simple device but can cause **network congestion** and **collisions** due to its half-duplex nature.
+
+  ### Example:
+  If **Device A** sends data, all other devices (B, C, D) must wait for the transmission to finish before they can send their data.
+
+---
+
+## 2. **Bridge**
+- **Duplex Mode**: **Full-Duplex**
+- **Explanation**:
+  A **bridge** is a more intelligent networking device that operates at the **Data Link Layer (Layer 2)**. It is used to connect two or more LAN segments. Unlike a hub, a bridge can forward data to the correct segment, reducing collisions. It also operates in **full-duplex** mode, meaning it can send and receive data at the same time on each segment. This improves performance as there is no need to wait for the other device to stop transmitting.
+
+  ### Key Characteristics of Bridge:
+  - Operates at **Layer 2 (Data Link Layer)** of the OSI model.
+  - **Learns** and stores MAC addresses in a **MAC address table**.
+  - Can reduce **collisions** by dividing networks into **separate collision domains**.
+  - **Full-Duplex** operation allows simultaneous sending and receiving of data.
+
+  ### Example:
+  If **Device A** in LAN-1 sends data to **Device B** in LAN-2, the bridge forwards the data only to LAN-2, ensuring no collision occurs within the respective segments.
+
+---
+
+## 3. **Router**
+- **Duplex Mode**: **Full-Duplex**
+- **Explanation**:
+  A **router** is a **Layer 3 (Network Layer)** device that connects different networks or subnets, enabling devices in different networks to communicate with each other. Routers operate in **full-duplex** mode, similar to bridges, as they need to send and receive data at the same time to maintain efficient communication. Routers use **IP addresses** to determine the best path for data to travel from source to destination.
+
+  ### Key Characteristics of Router:
+  - Operates at **Layer 3 (Network Layer)** of the OSI model.
+  - **Routes** packets between different networks (or subnets).
+  - Uses **routing tables** and **IP addresses** to forward data.
+  - Can perform **Network Address Translation (NAT)** to enable multiple devices in a local network to share a single public IP.
+  - **Full-Duplex** operation enables simultaneous sending and receiving.
+
+  ### Example:
+  If **Device A** (192.168.0.1) in Network 1 wants to send data to **Device B** (10.0.0.1) in Network 2, the router will determine the best path and forward the packet from one network to the other.
+
+---
+
+## Summary of Differences:
+
+| **Device**  | **Duplex Mode** | **Function**                                       | **OSI Layer**     |
+|-------------|-----------------|---------------------------------------------------|-------------------|
+| **Hub**     | Half-Duplex     | Connects devices in a LAN, **broadcasts** data.   | Physical Layer (Layer 1) |
+| **Bridge**  | Full-Duplex     | Connects and segments LANs, reduces collisions.   | Data Link Layer (Layer 2) |
+| **Router**  | Full-Duplex     | Routes data between different networks or subnets. | Network Layer (Layer 3) |
+
+---
+
+In short:
+- **Hub**: Half-duplex, broadcasts data to all devices in a network.
+- **Bridge**: Full-duplex, connects multiple network segments and filters traffic.
+- **Router**: Full-duplex, routes data between different networks based on IP addresses.
+
+These differences directly impact **network performance**, **collision domains**, and **how data is forwarded** within networks.
+
+
+---
+
+# Understanding Collision Domains with Bridges
+
+## Collision Domain Explanation
+
+A **collision domain** is a network segment where data packets can "collide" if two devices try to send data at the same time on the same shared medium.
+
+### Collision Domain in the Context of a Bridge
+
+1. **Before using a bridge**: All devices in the same LAN are in a **single collision domain**, meaning they share the same bandwidth. If two devices send data at the same time, a **collision** occurs, causing data loss and requiring retransmission.
+
+2. **After introducing a bridge**: The bridge divides the network into **separate collision domains**. Each segment (LAN-1, LAN-2) is now its own collision domain. This means that:
+   - **LAN-1** has its own collision domain.
+   - **LAN-2** has its own collision domain.
+
+Devices in **LAN-1** can transmit simultaneously with devices in **LAN-2** without causing collisions.
+
+### Why is this important?
+
+- **Before the bridge**: All devices in the network share the same collision domain. If one device transmits, others must wait. This can lead to congestion and poor performance.
+- **After the bridge**: The network is divided into separate collision domains, reducing the chances of collisions and improving overall network efficiency.
+
+### The Importance of Collision Domains
+
+- By using a bridge, the network can **scale better**. The bridge isolates collision domains, ensuring that larger networks can function smoothly without data collisions.
+- It improves **performance** by reducing **network congestion**.
+
+---
+
+## Simple Example of Collision Domains in a Bridge Setup
+
+Let’s go back to your example:
+
+- **LAN-1** has `Lap1`, `Lap2`, `Lap3`.
+- **LAN-2** has `Lap4`, `Lap5`, `Lap6`.
+
+### Without a Bridge:
+
+- All devices (Lap1, Lap2, Lap3, Lap4, Lap5, Lap6) are in a single collision domain. If **Lap1** and **Lap4** try to send data at the same time, their packets will **collide**.
+
+### With a Bridge:
+
+- **LAN-1** (with `Lap1`, `Lap2`, `Lap3`) is in **collision domain 1**.
+- **LAN-2** (with `Lap4`, `Lap5`, `Lap6`) is in **collision domain 2**.
+
+Now, **Lap1** and **Lap4** can send data at the same time without causing collisions, as they are in different collision domains.
+
+---
+
+## Summary
+
+- A **bridge** divides the network into **two collision domains** (one for each connected segment).
+- Each segment can **send data independently** without causing collisions with other segments.
+- This reduces **network congestion** and improves **performance**.
 
 
 
-
-
+        **HUB** – 
+        We start with a hub because we should get rid of it as soon as possible. The reason being, it neither breaks a collision domain nor a broadcast domain,i.e a hub is neither a collision domain separator nor a broadcast domain separator. All the devices connected to a hub are in a single collision and single broadcast domain. Remember, hubs do not segment a network, they just connect network segments.
+        **SWITCH** – 
+        Coming to switches, we have an advantage over the hub. Every port on a switch is in a different collision domain, i.e a switch is a collision domain separator. So messages that come from devices connected to different ports never experience a collision. This helps us during designing networks but there is still a problem with switches. They never break broadcast domains, which means it is not a broadcast domain separator. All the ports on the switch are still in a single broadcast domain. If a device sends a broadcast message, it will still cause congestion.
+        **ROUTER** – 
+        Last, but not least, we have our savior. A router not only breaks collision domains but also breaks broadcast domains, which means it is both collisions as well as broadcast domain separators. A router creates a connection between two networks. A broadcast message from one network will never reach the other one as the router will never let it pass. 
 
 ---
 ## **3. Switch**
