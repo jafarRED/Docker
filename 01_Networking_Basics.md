@@ -183,7 +183,104 @@ Think of a hub as a **loudspeaker**. When you speak into it, everyone in the roo
 
 ---
 
-## **2. Switch**
+# Bridge Device and MAC Address Table Example
+
+A **Bridge** is a networking device used to connect multiple Local Area Networks (LANs) into a larger network. It operates at the Data Link Layer (Layer 2) and is used to filter traffic between the networks based on MAC addresses.
+
+### 1. First Communication (Learning Phase)
+
+- **Scenario**: `Lap1` in **LAN-1** sends a message to `Lap2` (also in **LAN-1**).
+- The bridge doesn't know where `Lap2`'s MAC address is, so it **broadcasts the message to both LANs**.
+  
+#### MAC Address Table (Before)
+| MAC Address        | Port  |  
+|--------------------|-------|  
+|                    |       |  
+
+- After receiving the broadcast, `Lap2` responds, and the bridge learns that `Lap1`'s MAC address is connected to **port-1** (since `Lap1` is in LAN-1), and `Lap2`'s MAC address is connected to **port-1** (since `Lap2` is also in LAN-1).
+
+#### MAC Address Table (After Learning)
+| MAC Address        | Port  |  
+|--------------------|-------|  
+| 00:11:22:33:44:01  | Port-1 |  
+| 00:11:22:33:44:02  | Port-1 |  
+
+At this stage, the bridge knows where `Lap1` and `Lap2` are located (both in **LAN-1**), but doesn't yet know about `Lap3`, `Lap4`, `Lap5`, or `Lap6`.
+
+---
+
+### 2. Second Communication (Learning Phase Continues)
+
+- **Scenario**: `Lap1` now sends a message to `Lap4` (in **LAN-2**).
+- The bridge doesn't know `Lap4`'s MAC address yet, so it **broadcasts the message** to both **LAN-1** and **LAN-2**.
+  
+#### MAC Address Table (Before)
+| MAC Address        | Port  |  
+|--------------------|-------|  
+| 00:11:22:33:44:01  | Port-1 |  
+| 00:11:22:33:44:02  | Port-1 |  
+
+- `Lap4` in **LAN-2** responds. The bridge then learns that `Lap4`'s MAC address is connected to **port-2** (since `Lap4` is in **LAN-2**).
+
+#### MAC Address Table (After Learning)
+| MAC Address        | Port  |  
+|--------------------|-------|  
+| 00:11:22:33:44:01  | Port-1 |  
+| 00:11:22:33:44:02  | Port-1 |  
+| 00:11:22:33:44:04  | Port-2 |  
+
+---
+
+### 3. Subsequent Communication (Filtered Traffic)
+
+- **Scenario 1**: `Lap1` sends a message to `Lap2` (both in **LAN-1**).
+  - The bridge already knows that `Lap2` is connected to **port-1**.
+  - The bridge **does not broadcast** to **LAN-2** anymore. It simply forwards the message to **LAN-1** (to `Lap2`).
+
+#### MAC Address Table
+| MAC Address        | Port  |  
+|--------------------|-------|  
+| 00:11:22:33:44:01  | Port-1 |  
+| 00:11:22:33:44:02  | Port-1 |  
+| 00:11:22:33:44:04  | Port-2 |  
+
+- **Scenario 2**: `Lap1` sends a message to `Lap4` (in **LAN-2**).
+  - The bridge already knows that `Lap4` is connected to **port-2**.
+  - The bridge **does not broadcast** to **LAN-1** anymore. It simply forwards the message to **LAN-2** (to `Lap4`).
+
+---
+
+
+1. **Learning Phase**:
+   - The bridge broadcasts to both networks the first time it doesn't know a destination's MAC address.
+   - It learns the MAC address and updates its **MAC address table**.
+
+2. **After Learning**:
+   - The bridge forwards frames to the correct network (LAN-1 or LAN-2) based on its MAC address table, instead of broadcasting to both networks.
+
+This method helps to **reduce unnecessary network traffic** by only sending data where it's needed.
+
+---
+
+### Difference Between Hub and Bridge
+
+| Feature               | Hub                                       | Bridge                                  |
+|-----------------------|-------------------------------------------|-----------------------------------------|
+| **Function**           | Repeats signals to all devices.           | Filters traffic and forwards frames based on MAC addresses. |
+| **Layer**              | Layer 1 (Physical Layer)                 | Layer 2 (Data Link Layer)              |
+| **Traffic Management** | Broadcasts to all devices.               | Forwards traffic only to the relevant network segment. |
+| **Efficiency**         | Less efficient, as it causes congestion.  | More efficient, reduces collisions and traffic. |
+| **MAC Address Table**  | Does not maintain a MAC address table.    | Maintains a MAC address table for learning and forwarding. |
+
+---
+
+
+
+
+
+
+---
+## **3. Switch**
 ### **Definition:**
 - A switch connects multiple devices but forwards data **only to the intended recipient**.
 - Operates at the **Data Link Layer (Layer 2)** and sometimes at **Layer 3**.
@@ -201,7 +298,7 @@ A switch is like a **personal secretary**. When you give a message, it ensures i
 
 ---
 
-## **3. Router**
+## **4. Router**
 ### **Definition:**
 - A router connects different networks and forwards data between them.
 - Operates at the **Network Layer (Layer 3)** of the OSI model.
@@ -218,7 +315,7 @@ A router is like a **GPS navigator**. It determines the best route to deliver yo
 
 ---
 
-## **4. Access Point (AP)**
+## **5. Access Point (AP)**
 ### **Definition:**
 - An access point allows wireless devices to connect to a wired network.
 - Operates at the **Data Link Layer (Layer 2)**.
@@ -232,7 +329,7 @@ An access point is like a **Wi-Fi hotspot** in a coffee shop that connects your 
 
 ---
 
-## **5. Firewall**
+## **6. Firewall**
 ### **Definition:**
 - A firewall is a security device that monitors and controls incoming and outgoing network traffic.
 - Operates at the **Network Layer (Layer 3)** and above.
@@ -246,7 +343,7 @@ A firewall is like a **security guard** at the entrance of a building, allowing 
 
 ---
 
-## **6. Modem**
+## **7. Modem**
 ### **Definition:**
 - A modem (Modulator-Demodulator) is a device that converts digital signals to analog for transmission over telephone lines and vice versa.
 - Used to connect to the internet via an ISP.
@@ -260,7 +357,7 @@ A modem is like a **translator** that converts one language (digital) to another
 
 ---
 
-## **7. Network Interface Card (NIC)**
+## **8. Network Interface Card (NIC)**
 ### **Definition:**
 - A NIC is a hardware component that allows a device to connect to a network.
 - Can be wired (Ethernet) or wireless (Wi-Fi).
