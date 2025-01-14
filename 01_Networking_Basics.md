@@ -325,9 +325,9 @@ In **full-duplex** communication, data can be transmitted in **both directions s
 ### Representation:
 
 
-+--------+<------->+--------+
-| Sender |         | Receiver|
-+--------+         +--------+
++--------+ <-------> +--------+
+| Sender |           | Receiver|
++--------+           +--------+
 
 
 - **Sender** can send data while simultaneously **Receiver** can send data back.
