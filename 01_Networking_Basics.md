@@ -483,24 +483,19 @@ Now, **Lap1** and **Lap4** can send data at the same time without causing collis
 ---
 **Bridge**:
   - A bridge connects two or more network segments (usually two LANs) and forwards frames between them based on MAC addresses.
-    
   - It operates at Layer 2 (Data Link Layer) of the OSI model.
-    
   - A bridge typically has two ports, one for each LAN segment it connects.
+    
 **Switch**:
   - A switch is essentially a multiport bridge because it performs the same function as a bridge—forwarding frames based on MAC addresses—but it has more ports.
-
   - A switch operates at Layer 2 (Data Link Layer) like a bridge, but it is designed to handle multiple devices, often within the same network.
-  
   - Unlike a bridge, which connects only two segments, a switch can connect many devices within a network (multiple LAN segments), making it a multiport version of the bridge.
-  
   - A switch creates a collision domain for each of its ports, reducing collisions compared to a hub, and can also perform learning (storing MAC addresses in its MAC address table).
-  
   - So, while both bridges and switches are Layer 2 devices that forward data based on MAC addresses, the main difference is that a switch provides more ports and is designed for more complex networking.
 
 **In short:**
-Bridge: Typically used for connecting two segments.
-Switch: A multiport bridge used to connect multiple devices in a network.
+  - Bridge: Typically used for connecting two segments.
+  - Switch: A multiport bridge used to connect multiple devices in a network.
 
 
 A 24-port switch would create 24 collision domains, one for each of its ports.
