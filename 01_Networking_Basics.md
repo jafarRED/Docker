@@ -293,7 +293,6 @@ This method helps to **reduce unnecessary network traffic** by only sending data
 
 Here’s the revised version of your explanation with the corrections included and sender/receiver in boxes for better clarity in **Markdown** syntax:
 
-```markdown
 # Duplex Modes and Device Functions
 
 ## Half-Duplex Communication
@@ -302,15 +301,15 @@ In **half-duplex** communication, data transmission can only happen in **one dir
 
 ### Representation:
 
-```
+
 +--------+        +--------+
 | Sender |------->| Receiver|
 +--------+        +--------+
 
+
 +--------+        +--------+
 | Receiver|<------| Sender |
 +--------+        +--------+
-```
 
 - **Sender** sends data to **Receiver**.
 - **Receiver** sends data back to **Sender**.
@@ -325,11 +324,11 @@ In **full-duplex** communication, data can be transmitted in **both directions s
 
 ### Representation:
 
-```
+
 +--------+<------->+--------+
 | Sender |         | Receiver|
 +--------+         +--------+
-```
+
 
 - **Sender** can send data while simultaneously **Receiver** can send data back.
 
@@ -361,9 +360,7 @@ In short:
 - **Full-Duplex**: Two-way data transfer at the same time.
 
 These concepts play a crucial role in network efficiency, device capabilities, and how data is transmitted in a network.
-```
 
-This markdown explanation is structured to present the concepts of half-duplex and full-duplex, with better clarity and diagrams for understanding. It also includes the correct descriptions and appropriate device names.
 
 
 
