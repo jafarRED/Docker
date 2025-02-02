@@ -112,11 +112,123 @@ terraform apply -var-file="prod.tfvars"
 - **`terraform.tfvars`** → Assigns values to variables.
 - **Default Behavior:** Terraform automatically loads terraform.tfvars and terraform.tfvars.json without requiring -var-file.
 - **Explicit Declaration:** When using a different name (e.g., prod.tfvars, dev.tfvars), you must use -var-file to let Terraform know which file to use.
- ## **Terraform checks `tfvars`, then environment variables, then defaults.**
 - Multiple `*.tfvars` files help manage different environments.
 
 This structure keeps Terraform code clean, reusable, and easy to manage across environments.
 
 ---
+
+# **Terraform Variable Definition Precedence**
+
+Terraform loads variables in a specific order, where later sources take precedence over earlier ones. This means that if the same variable is defined in multiple places, Terraform will use the value from the highest-precedence source.
+
+---
+
+## **Order of Variable Precedence**
+
+1. **Environment Variables**  
+   - Terraform allows variables to be set using environment variables prefixed with `TF_VAR_`.  
+   - Example:  
+     ```sh
+     export TF_VAR_instance_type="t2.large"
+     terraform apply
+     ```
+   - Here, Terraform will use `t2.large` for the `instance_type` variable.
+
+2. **terraform.tfvars File (if present)**  
+   - If a file named `terraform.tfvars` exists, Terraform automatically loads it.  
+   - Example `terraform.tfvars`:
+     ```hcl
+     instance_type = "t2.medium"
+     ```
+   - If an environment variable is also set, this file **overrides** it.
+
+3. **terraform.tfvars.json File (if present)**  
+   - Similar to `terraform.tfvars`, but in JSON format.  
+   - Example `terraform.tfvars.json`:
+     ```json
+     {
+       "instance_type": "t2.small"
+     }
+     ```
+   - This takes precedence over the previous `.tfvars` file.
+
+4. **Any `.auto.tfvars` or `.auto.tfvars.json` Files**  
+   - Terraform automatically loads files ending in `.auto.tfvars` or `.auto.tfvars.json`.  
+   - If multiple `.auto.tfvars` files exist, they are processed in **lexical order**.
+   - Example:
+     ```
+     01-default.auto.tfvars
+     02-production.auto.tfvars
+     ```
+   - If both files define `instance_type`, the value from `02-production.auto.tfvars` is used.
+
+5. **Command-Line Options (`-var` and `-var-file`)**  
+   - These have the **highest precedence** and override all other sources.  
+   - Example:
+     ```sh
+     terraform apply -var "instance_type=t2.micro"
+     ```
+   - This will override any value defined in `.tfvars`, `.auto.tfvars`, or environment variables.
+
+   - If using a non-standard variable file, use:
+     ```sh
+     terraform apply -var-file="custom.tfvars"
+     ```
+   - This explicitly loads variables from `custom.tfvars`.
+
+---
+
+## **Example Scenario: Resolving Conflicts**
+
+Suppose we define `instance_type` in multiple places:
+
+### **Environment Variable**
+```sh
+export TF_VAR_instance_type="t2.large"
+```
+
+### **terraform.tfvars**
+```hcl
+instance_type = "t2.medium"
+```
+
+### **terraform.tfvars.json**
+```json
+{
+  "instance_type": "t2.small"
+}
+```
+
+### **01-default.auto.tfvars**
+```hcl
+instance_type = "t2.micro"
+```
+
+### **02-production.auto.tfvars**
+```hcl
+instance_type = "t2.nano"
+```
+
+### **Command Line**
+```sh
+terraform apply -var "instance_type=t3.large"
+```
+
+### **Final Value Used by Terraform?**
+1. **Command-line value (`t3.large`) wins** because it has the highest precedence.
+2. If no command-line value was given, Terraform would use `instance_type = "t2.nano"` from `02-production.auto.tfvars`.
+3. If `.auto.tfvars` files were missing, it would use `t2.small` from `terraform.tfvars.json`.
+4. If `.tfvars.json` was missing, it would use `t2.medium` from `terraform.tfvars`.
+5. If no `.tfvars` file existed, it would use the environment variable (`t2.large`).
+
+---
+
+## **Key Takeaways**
+- **Later sources in the list override earlier ones.**
+- **Command-line values (`-var`) have the highest precedence.**
+- **Use `.auto.tfvars` for automatic loading, processed in lexical order.**
+- **Use environment variables (`TF_VAR_`) for automation.**
+- **Default `terraform.tfvars` and `.tfvars.json` are loaded automatically.**
 
 
