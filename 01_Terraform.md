@@ -231,4 +231,124 @@ terraform apply -var "instance_type=t3.large"
 - **Use environment variables (`TF_VAR_`) for automation.**
 - **Default `terraform.tfvars` and `.tfvars.json` are loaded automatically.**
 
+---
+
+
+
+
+# Terraform Variable Precedence
+
+## Introduction
+Terraform provides multiple ways to define variables, and it follows a specific order of precedence to determine which value to use. This document explains the precedence rules with detailed examples.
+
+## Variable Precedence Order
+Terraform loads variables in the following order, with later sources overriding earlier ones:
+
+1. **Default values in `variables.tf`**
+2. **Environment variables (e.g., `TF_VAR_instance_type`)**
+3. **Values in `terraform.tfvars` or `terraform.tfvars.json`**
+4. **Values in `*.auto.tfvars` files (processed in lexical order)**
+5. **Explicit values using `-var` or `-var-file` in the command line (highest priority)**
+
+---
+
+## Scenario 1: Default Value in `variables.tf` and Environment Variable
+
+### Files:
+```hcl
+# variables.tf
+variable "instance_type" {
+  default = "t2.micro"
+}
+```
+
+### Setting an Environment Variable:
+```bash
+export TF_VAR_instance_type="t2.large"
+```
+
+### Running Terraform Plan:
+```bash
+terraform plan
+```
+
+### Outcome:
+- Terraform will use **`t2.large`** from the **environment variable**.
+- The environment variable overrides the default value in `variables.tf`.
+
+**Precedence Order:**
+- `variables.tf (default value)`: `t2.micro` ❌ (overridden)
+- **Environment variable (`TF_VAR_instance_type`)**: `t2.large` ✅ (used)
+
+---
+
+## Scenario 2: Adding a `terraform.tfvars` File
+
+### Files:
+```hcl
+# terraform.tfvars
+instance_type = "t2.medium"
+```
+
+### Running Terraform Plan:
+```bash
+terraform plan
+```
+
+### Outcome:
+- Terraform will use **`t2.medium`** from the `terraform.tfvars` file.
+- The `terraform.tfvars` value overrides the **environment variable (`TF_VAR_instance_type`)** and the **default value** in `variables.tf`.
+
+**Precedence Order:**
+- `variables.tf (default value)`: `t2.micro` ❌ (overridden)
+- `TF_VAR_instance_type (env variable)`: `t2.large` ❌ (overridden)
+- **`terraform.tfvars` file**: `t2.medium` ✅ (used)
+
+---
+
+## Scenario 3: Using `-var` or `-var-file` in the Command Line
+
+### Using `-var` flag:
+```bash
+terraform plan -var "instance_type=t2.xlarge"
+```
+
+### Using a Different `tfvars` File:
+```bash
+terraform plan -var-file="prod.tfvars"
+```
+
+### Files:
+```hcl
+# prod.tfvars
+instance_type = "t2.2xlarge"
+```
+
+### Outcome:
+- If we use `-var "instance_type=t2.xlarge"`, Terraform will use **`t2.xlarge`**.
+- If we use `-var-file="prod.tfvars"`, Terraform will use **`t2.2xlarge`**.
+- Command-line options always take the **highest precedence**.
+
+**Final Precedence Order:**
+1. `variables.tf (default value)`: `t2.micro` ❌ (overridden)
+2. `TF_VAR_instance_type (env variable)`: `t2.large` ❌ (overridden)
+3. `terraform.tfvars` file: `t2.medium` ❌ (overridden)
+4. **`-var` or `-var-file` flag**: ✅ (highest priority, used)
+
+---
+
+## Summary Table
+
+| Priority | Variable Source | Example Value | Used? |
+|----------|----------------|---------------|-------|
+| 1️⃣ | `variables.tf` (default) | `t2.micro` | ❌ |
+| 2️⃣ | Environment Variable (`TF_VAR_instance_type`) | `t2.large` | ❌ |
+| 3️⃣ | `terraform.tfvars` file | `t2.medium` | ❌ |
+| 4️⃣ | `-var` or `-var-file` flag | `t2.xlarge` / `t2.2xlarge` | ✅ |
+
+### Key Takeaways:
+- **Environment variables (`TF_VAR_...`) override default values in `variables.tf`.**
+- **`terraform.tfvars` and `*.auto.tfvars` files override environment variables.**
+- **Command-line `-var` and `-var-file` options take the highest precedence.**
+
 
