@@ -110,7 +110,9 @@ terraform apply -var-file="prod.tfvars"
 - **`main.tf`** → Contains the infrastructure definition.
 - **`variables.tf`** → Declares variables (no values assigned).
 - **`terraform.tfvars`** → Assigns values to variables.
-- Terraform checks `tfvars`, then environment variables, then defaults.
+- **Default Behavior:** Terraform automatically loads terraform.tfvars and terraform.tfvars.json without requiring -var-file.
+- **Explicit Declaration:** When using a different name (e.g., prod.tfvars, dev.tfvars), you must use -var-file to let Terraform know which file to use.
+ ## **Terraform checks `tfvars`, then environment variables, then defaults.**
 - Multiple `*.tfvars` files help manage different environments.
 
 This structure keeps Terraform code clean, reusable, and easy to manage across environments.
